@@ -1,0 +1,44 @@
+﻿@model Assignment2.Models.unit
+
+@{
+    ViewBag.Title = "Details";
+    string[] splitPDF = @Model.unitOutline.Split('/');
+    string PDFName = splitPDF[splitPDF.Length - 1];
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>unit</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.unitTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.unitTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.unitCoordinator)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.unitCoordinator)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.unitOutline)
+        </dt>
+
+        <dd>
+            <a href="../../@Model.unitOutline">@PDFName</a>
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.unitCode }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Assignment2.Models.unit>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.unitTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.unitCoordinator)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.unitOutline)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    string[] splitPDF = @item.unitOutline.Split('/');
+    string PDFName = splitPDF[splitPDF.Length - 1];
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.unitTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.unitCoordinator)
+        </td>
+        <td>
+            <a href="../../@item.unitOutline">@PDFName</a>
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.unitCode }) |
+            @Html.ActionLink("Details", "Details", new { id=item.unitCode }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.unitCode })
+        </td>
+    </tr>
+}
+
+</table>

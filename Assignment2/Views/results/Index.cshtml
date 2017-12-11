@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Assignment2.Models.result>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.rYear)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.rSemester)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ass1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ass2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.exam)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.unitScore)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.grade)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.student.studentName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.unit.unitTitle)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.rYear)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.rSemester)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ass1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ass2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.exam)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.unitScore)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.grade)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.student.studentName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.unit.unitTitle)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.resultID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.resultID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.resultID })
+        </td>
+    </tr>
+}
+
+</table>

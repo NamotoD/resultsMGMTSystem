@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h2>RESULTS MANAGEMENT SYSTEM</h2>
+    <p class="lead">Manage Students, Units and Results and view Reports</p>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <h2>@Html.ActionLink("Students", "Index", "Students")</h2>
+        <p>
+            Manage students details.
+        </p>
+    </div>
+    <div class="col-md-3">
+        <h2>@Html.ActionLink("Manage Units", "Index", "Units")</h2>
+        <p>User with admin rights can manage units details.</p>
+    </div>
+    <div class="col-md-3">
+        <h2>@Html.ActionLink("Manage Results", "Index", "Results")</h2>
+        <p>Only results manager can access and manage results details.</p>
+    </div>
+    <div class="col-md-3">
+        <h2>@Html.ActionLink("View Reports", "Index", "Reports")</h2>
+        <p>Only results manager can access and manage report details.</p>
+    </div>
+</div>

@@ -1,0 +1,123 @@
+﻿@model IEnumerable<Assignment2.Models.result>
+
+@{
+    ViewBag.Title = "Index";
+    var student = Request.Params["student"];
+    var unit = Request.Params["unit"];
+    var semester = Request.Params["semester"];
+    var year = Request.Params["year"];
+
+
+    //System.Diagnostics.Debug.WriteLine(student);
+}
+
+<h2>Index</h2>
+
+<p>
+    @using (Html.BeginForm("Index", "Reports", FormMethod.Get))
+    {
+    <p> Student ID:     @Html.DropDownList("student", "All")
+        Unit Code:      @Html.DropDownList("unit", "All")
+        Semester:       @Html.DropDownList("semester", "All")
+        Year:           @Html.TextBox("year") <br />
+        <input type="submit" value="Search" />
+    </p>
+    }
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.rYear)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.rSemester)
+        </th>
+        <th>
+            @Html.ActionLink("Student ID", "Index", new { student = student, unit = unit, semester = semester, year = year, sortType = ViewBag.sortByStudentID })
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.student.studentName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.student.studentPhoto)
+        </th>
+        <th>
+            @Html.ActionLink("Unit code", "Index", new { student = student, unit = unit, semester = semester, year = year, sortType = ViewBag.sortByUnitCode })
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.unit.unitTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.unit.unitOutline)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ass1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ass2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.exam)
+        </th>
+        <th>
+            @Html.ActionLink("Unit score", "Index", new { student = student, unit = unit, semester = semester, year = year, sortType = ViewBag.sortByUnitScore })
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.grade)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+
+    string[] splitPDF = @item.unit.unitOutline.Split('/');
+    string lastPartOfPDF = splitPDF[splitPDF.Length - 1];
+
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.rYear)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.rSemester)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.student.studentID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.student.studentName)
+        </td>
+        <td>
+            <img src="../../@item.student.studentPhoto" alt="Image" height="32" width="32" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.unit.unitCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.unit.unitTitle)
+        </td>
+        <td>
+            <a href="../../@item.unit.unitOutline">@lastPartOfPDF</a>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ass1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ass2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.exam)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.unitScore)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.grade)
+        </td>
+    </tr>
+}
+
+</table>
+<hr>
+<p>Row count: @ViewBag.rowCount</p>
+<p>Unit score average: @ViewBag.averageScore @ViewBag.grade</p>

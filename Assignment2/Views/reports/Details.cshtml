@@ -1,0 +1,74 @@
+﻿@model Assignment2.Models.result
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>result</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.rYear)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.rYear)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.rSemester)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.rSemester)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ass1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ass1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ass2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ass2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.exam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.exam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.student.studentName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.student.studentName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.unit.unitTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.unit.unitTitle)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.resultID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

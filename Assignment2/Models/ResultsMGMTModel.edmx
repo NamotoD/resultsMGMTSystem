@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="createMGMT_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="result">
+          <Key>
+            <PropertyRef Name="resultID" />
+          </Key>
+          <Property Name="resultID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="unitCode" Type="char" MaxLength="7" Nullable="false" />
+          <Property Name="studentID" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="rYear" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="rSemester" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="ass1" Type="tinyint" Nullable="false" />
+          <Property Name="ass2" Type="tinyint" Nullable="false" />
+          <Property Name="exam" Type="tinyint" Nullable="false" />
+          <Property Name="unitScore" Type="tinyint" StoreGeneratedPattern="Computed" />
+          <Property Name="grade" Type="varchar" MaxLength="4" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="student">
+          <Key>
+            <PropertyRef Name="studentID" />
+          </Key>
+          <Property Name="studentID" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="studentName" Type="varchar" MaxLength="30" />
+          <Property Name="studentPhoto" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="unit">
+          <Key>
+            <PropertyRef Name="unitCode" />
+          </Key>
+          <Property Name="unitCode" Type="char" MaxLength="7" Nullable="false" />
+          <Property Name="unitTitle" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="unitCoordinator" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="unitOutline" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <Association Name="studentID_fk">
+          <End Role="student" Type="Self.student" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="result" Type="Self.result" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="student">
+              <PropertyRef Name="studentID" />
+            </Principal>
+            <Dependent Role="result">
+              <PropertyRef Name="studentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="unit_code_fk">
+          <End Role="unit" Type="Self.unit" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="result" Type="Self.result" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="unit">
+              <PropertyRef Name="unitCode" />
+            </Principal>
+            <Dependent Role="result">
+              <PropertyRef Name="unitCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="createMGMT_DBModelStoreContainer">
+          <EntitySet Name="result" EntityType="Self.result" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="student" EntityType="Self.student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="unit" EntityType="Self.unit" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="studentID_fk" Association="Self.studentID_fk">
+            <End Role="student" EntitySet="student" />
+            <End Role="result" EntitySet="result" />
+          </AssociationSet>
+          <AssociationSet Name="unit_code_fk" Association="Self.unit_code_fk">
+            <End Role="unit" EntitySet="unit" />
+            <End Role="result" EntitySet="result" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="createMGMT_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="result">
+          <Key>
+            <PropertyRef Name="resultID" />
+          </Key>
+          <Property Name="resultID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="unitCode" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="studentID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="rYear" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="rSemester" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ass1" Type="Byte" Nullable="false" />
+          <Property Name="ass2" Type="Byte" Nullable="false" />
+          <Property Name="exam" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="student" Relationship="Self.studentID_fk" FromRole="result" ToRole="student" />
+          <NavigationProperty Name="unit" Relationship="Self.unit_code_fk" FromRole="result" ToRole="unit" />
+          <Property Name="unitScore" Type="Byte" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="grade" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="student">
+          <Key>
+            <PropertyRef Name="studentID" />
+          </Key>
+          <Property Name="studentID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="studentName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="results" Relationship="Self.studentID_fk" FromRole="student" ToRole="result" />
+          <Property Name="studentPhoto" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="unit">
+          <Key>
+            <PropertyRef Name="unitCode" />
+          </Key>
+          <Property Name="unitCode" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="unitCoordinator" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="results" Relationship="Self.unit_code_fk" FromRole="unit" ToRole="result" />
+          <Property Name="unitOutline" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="unitTitle" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="studentID_fk">
+          <End Role="student" Type="Self.student" Multiplicity="1" />
+          <End Role="result" Type="Self.result" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="student">
+              <PropertyRef Name="studentID" />
+            </Principal>
+            <Dependent Role="result">
+              <PropertyRef Name="studentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="unit_code_fk">
+          <End Role="unit" Type="Self.unit" Multiplicity="1" />
+          <End Role="result" Type="Self.result" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="unit">
+              <PropertyRef Name="unitCode" />
+            </Principal>
+            <Dependent Role="result">
+              <PropertyRef Name="unitCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="createMGMT_DBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="results" EntityType="Self.result" />
+          <EntitySet Name="students" EntityType="Self.student" />
+          <EntitySet Name="units" EntityType="Self.unit" />
+          <AssociationSet Name="studentID_fk" Association="Self.studentID_fk">
+            <End Role="student" EntitySet="students" />
+            <End Role="result" EntitySet="results" />
+          </AssociationSet>
+          <AssociationSet Name="unit_code_fk" Association="Self.unit_code_fk">
+            <End Role="unit" EntitySet="units" />
+            <End Role="result" EntitySet="results" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="createMGMT_DBModelStoreContainer" CdmEntityContainer="createMGMT_DBEntities">
+          <EntitySetMapping Name="results">
+            <EntityTypeMapping TypeName="createMGMT_DBModel.result">
+              <MappingFragment StoreEntitySet="result">
+                <ScalarProperty Name="grade" ColumnName="grade" />
+                <ScalarProperty Name="unitScore" ColumnName="unitScore" />
+                <ScalarProperty Name="resultID" ColumnName="resultID" />
+                <ScalarProperty Name="unitCode" ColumnName="unitCode" />
+                <ScalarProperty Name="studentID" ColumnName="studentID" />
+                <ScalarProperty Name="rYear" ColumnName="rYear" />
+                <ScalarProperty Name="rSemester" ColumnName="rSemester" />
+                <ScalarProperty Name="ass1" ColumnName="ass1" />
+                <ScalarProperty Name="ass2" ColumnName="ass2" />
+                <ScalarProperty Name="exam" ColumnName="exam" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="students">
+            <EntityTypeMapping TypeName="createMGMT_DBModel.student">
+              <MappingFragment StoreEntitySet="student">
+                <ScalarProperty Name="studentPhoto" ColumnName="studentPhoto" />
+                <ScalarProperty Name="studentID" ColumnName="studentID" />
+                <ScalarProperty Name="studentName" ColumnName="studentName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="units">
+            <EntityTypeMapping TypeName="createMGMT_DBModel.unit">
+              <MappingFragment StoreEntitySet="unit">
+                <ScalarProperty Name="unitTitle" ColumnName="unitTitle" />
+                <ScalarProperty Name="unitOutline" ColumnName="unitOutline" />
+                <ScalarProperty Name="unitCode" ColumnName="unitCode" />
+                <ScalarProperty Name="unitCoordinator" ColumnName="unitCoordinator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
