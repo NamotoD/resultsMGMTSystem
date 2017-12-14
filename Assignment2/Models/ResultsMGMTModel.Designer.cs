@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'F:\ApplicationsDevelopment\ASP_NET\Assignment2\Assignment2\Assignment2\Models\ResultsMGMTModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\egon jouda\Desktop\Assignment2_10139126_CSI2441\Assignment2_light\Assignment2\Assignment2\Models\ResultsMGMTModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

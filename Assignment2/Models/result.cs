@@ -11,34 +11,20 @@ namespace Assignment2.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class result
     {
-        [Required]
         public int resultID { get; set; }
-        [Required]
         public string unitCode { get; set; }
-        [Required]
         public string studentID { get; set; }
-        [Required]
-        [RegularExpression(@"^\d{4}$", ErrorMessage = "Year has to contain 4 digits.")]
         public string rYear { get; set; }
-        [Required]
-        [RegularExpression(@"[1-2]", ErrorMessage = "Semester is either 1 or 2.")]
         public string rSemester { get; set; }
-        [Required]
-        [Range(0, 20, ErrorMessage = "Enter number between 0 to 20")]
         public byte ass1 { get; set; }
-        [Required]
-        [Range(0, 20, ErrorMessage = "Enter number between 0 to 20")]
         public byte ass2 { get; set; }
-        [Required]
-        [Range(0, 60, ErrorMessage = "Enter number between 0 to 60")]
         public byte exam { get; set; }
         public Nullable<byte> unitScore { get; set; }
         public string grade { get; set; }
-
+    
         public virtual student student { get; set; }
         public virtual unit unit { get; set; }
     }
