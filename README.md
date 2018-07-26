@@ -6,4 +6,6 @@ manages and produces reports about units, students and their results
 
 3. Open MS SQL SERVER Management Studio
 4. Locate and open file 'createMGMT_DB.sql' file
-5. Execute! the script 
+5. Execute! the script
+
+6. or don't.
